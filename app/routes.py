@@ -2,6 +2,8 @@ from flask import render_template, redirect, url_for, request
 from flask_login import login_required, current_user, login_user
 from app.forms import LoginForm, RegisterForm, TaskForm, ForgotForm
 from app import app
+from app.models import User, Task
+
 
 
 @app.route('/')
@@ -40,3 +42,23 @@ def login():
         return redirect(next_page)
 
     return render_template('login.html', title=title, form=form)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+
+    title = 'Register | Task Organizer'
+    form = RegisterForm()
+    if form.validate_on_submit():
+        users = User(username=form.username.data, email=form.email.data,
+                     first_name=form.first_name.data, last_name=form.last_name.data)
+        users.set_password(form.password.data)
+        users.set_answer(form.question.data)
+        db.session.add(users)
+        db.session.commit()
+
+        # message = Markup()
+        flash('Account Created!' + str(users.first_name))
+        # print("Account!")
+        return redirect(url_for('login'))
+    return render_template('register.html', title=title, form=form)
