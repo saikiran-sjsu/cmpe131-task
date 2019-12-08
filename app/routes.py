@@ -1,7 +1,10 @@
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_required, current_user, login_user
+from werkzeug.urls import url_parse
+
 from app.forms import LoginForm, RegisterForm, TaskForm, ForgotForm
-from app import app
+from app import app, db
+
 from app.models import User, Task
 
 
