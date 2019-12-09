@@ -1,0 +1,41 @@
+{% extends "base.html"%}
+{% block content %}
+
+
+<div class="mx-auto1">
+    <div class="navbar navbar-expand-md navbar-light bg-light">
+        <h1 class="my-0 mr-md-auto font-weight-normal">Task Organizer</h1>
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <a class="btn btn-outline-primary" href="/landing">{{current_user.first_name}}'s Home Page</a>
+            &nbsp;
+            <a class="btn btn-outline-primary" href="/logout">Logout</a>
+        </nav>
+    </div>
+</div>
+
+
+<div class="text-center">
+    <h1> Add Task </h1>
+    <div>
+        Add a new task item:
+        <form action="/add" method="post">
+            <br>
+            {{form.hidden_tag()}}
+            <p>Task: <input type="text" class="form-control-sm" id="taskname" name="task_name" aria-describedby="basic-addon1"> </p>
+            <p>Description: <input type="text" class="form-control-sm" name="description" aria-describedby="basic-addon1"> </p>
+            <script type="text/javascript">
+                function testing() {
+                    var task = document.getElementById('taskname').value;
+                    alert("Added Task: " + task)
+                }
+            </script>
+
+            <button type="submit" class="btn-outline-primary" onclick="testing()">Submit</button>
+
+        </form>
+    </div>
+
+
+</div>
+
+{% endblock %}
