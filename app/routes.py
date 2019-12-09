@@ -61,6 +61,13 @@ def login():
 
     title = 'Login | Task Organizer'
 
+    print('testing')
+    user = User.query.all()
+
+    for u in user:
+        print(u.username, u.first_name)
+
+    print('end testing')
     if current_user.is_authenticated:
         return redirect(url_for('landing'))
 
