@@ -1,5 +1,5 @@
 import pytest
-from app.models import User
+from TaskOrganizer.models import User
 
 
 def test_add_user_to_db(db):
